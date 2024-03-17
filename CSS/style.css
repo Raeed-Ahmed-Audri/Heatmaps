@@ -1,3 +1,70 @@
-.filter a {
-    
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
 }
+
+.heading h2 {
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.filter a {
+    color: #F2CD00;
+    border: 1px solid #F2CD00;
+    padding: 10px 14px;
+    background-color: #275D38;
+    text-decoration: none;
+    margin: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter a:hover {
+    background-color: #F2CD00;
+    color: #275D38;
+}
+
+.filter li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.filter ul {
+    padding-left: 0;
+}
+
+.filter {
+    text-align: center;
+    width: 100%;
+}
+
+.itemsContainer {
+    width: 100%;
+}
+
+.items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.items li {
+    padding: 5px;
+    float: left;
+    width: calc(25% - 10px);
+}
+
+.items img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.items li img{
+    width: 100%;
+}
+
