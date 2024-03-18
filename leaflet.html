@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -10,12 +10,29 @@
     <div id="CME7">
     </div>
     <script>
+        var roomsCME = ["7-108", "7-112", "7-116", "7-120", "7-124"];
+        var utilNumsCME = [0.86, 0.64, 0.42, 0.39, 0.09];
+        var colors = ["blue", "green", "yellow", "orange", "red"];
+        var colorMap = new Map();
+        for (i = 0; i < roomsCME.length; i++) {
+            if (utilNumsCME[i] >= 0.8) {
+                colorMap.set(roomsCME[i], colors[4]);
+            } else if (utilNumsCME[i] < 0.8 && utilNumsCME[i] >= 0.6) {
+                colorMap.set(roomsCME[i], colors[3]);
+            } else if (utilNumsCME[i] < 0.6 && utilNumsCME[i] >= 0.4) {
+                colorMap.set(roomsCME[i], colors[2]);
+            } else if (utilNumsCME[i] < 0.4 && utilNumsCME[i] >= 0.2) {
+                colorMap.set(roomsCME[i], colors[1]);
+            } else {
+                colorMap.set(roomsCME[i], colors[0]);
+            }
+        }
         var map = L.map("CME7", {
             crs: L.CRS.Simple,
             minZoom: -1.5
         }).setView([1000, 850], 13);
         var bounds = [[0, 0], [1700, 3400]];
-        var image = L.imageOverlay("./Images/CME/7.png", bounds).addTo(map)
+        var image = L.imageOverlay("./Images/CME/7.png", bounds).addTo(map);
         map.fitBounds(bounds);
         var hmCME7108 = L.polygon([
             [982, 840],
@@ -26,29 +43,44 @@
             [1260, 830],
             [1260, 932.5],
             [1237.5, 932.5],
-            [1237.5, 953],
-            [982, 953]], {
-            color: "red",
-            fillColor: "red",
+            [1237.5, 952.75],
+            [982, 952.75]], {
+            color: colorMap.get("7-108"),
+            fillColor: colorMap.get("7-108"),
             fillOpacity: 0.5
         }).addTo(map);
-        hmCME7108.bindPopup("<b>7-108</b><br>Utilization: 86%");
+        hmCME7108.bindPopup("<b>7-108</b><br>Utilization: " + (100 * utilNumsCME[0]) + "%");
+        var hmCME7112 = L.polygon([
+            [982, 1010.5],
+            [963, 1010.5],
+            [963, 1085.75],
+            [1260, 1085.75],
+            [1260, 1022.5],
+            [1237.5, 1022.5],
+            [1237.5, 953.25],
+            [982, 953.25]], {
+            color: colorMap.get("7-112"),
+            fillColor: colorMap.get("7-112"),
+            fillOpacity: 0.5
+        }).addTo(map);
+        hmCME7112.bindPopup("<b>7-112</b><br>Utilization: " + (100 * utilNumsCME[1]) + "%");
+        var hmCME7112 = L.polygon([
+            [990.5, 1086.25],
+            [990.5, 1214.5],
+            [1056.5, 1214.5],
+            [1056.5, 1254],
+            [1260, 1254],
+            [1260, 1086.25]], {
+            color: colorMap.get("7-116"),
+            fillColor: colorMap.get("7-116"),
+            fillOpacity: 0.5
+        }).addTo(map);
+        hmCME7112.bindPopup("<b>7-116</b><br>Utilization: " + (100 * utilNumsCME[2]) + "%");
         let marker = null;
         var point = "";
         map.on('click', (event) => {
-            if (marker !== null) {
-                map.removeLayer(marker);
-            }
             marker = L.marker([event.latlng.lat, event.latlng.lng]).addTo(map);
-            point = "[" + even,latlng.lat + ", " + event.latlng.lng + "]";
+            marker.bindPopup("Coords (lat/lng): " + event.latlng.lat + ", " + event.latlng.lng);
         })
-        const fs = require('fs');
-        fs.writeFile("points.txt", point, (err) => {
-            if (err) {
-                console.error("Error writing to the file: " + err);
-                return;
-            }
-            console.log("Points have been written to the file.");
-        });
     </script>
 </body>
