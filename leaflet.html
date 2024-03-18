@@ -64,18 +64,44 @@
             fillOpacity: 0.5
         }).addTo(map);
         hmCME7112.bindPopup("<b>7-112</b><br>Utilization: " + (100 * utilNumsCME[1]) + "%");
-        var hmCME7112 = L.polygon([
+        var hmCME7116 = L.polygon([
             [990.5, 1086.25],
             [990.5, 1214.5],
             [1056.5, 1214.5],
-            [1056.5, 1254],
-            [1260, 1254],
+            [1056.5, 1253.75],
+            [1260, 1253.75],
             [1260, 1086.25]], {
             color: colorMap.get("7-116"),
             fillColor: colorMap.get("7-116"),
             fillOpacity: 0.5
         }).addTo(map);
-        hmCME7112.bindPopup("<b>7-116</b><br>Utilization: " + (100 * utilNumsCME[2]) + "%");
+        hmCME7116.bindPopup("<b>7-116</b><br>Utilization: " + (100 * utilNumsCME[2]) + "%");
+        var hmCME7120 = L.polygon([
+            [1056.5, 1254.25],
+            [1056.5, 1385.5],
+            [1095.5, 1385.5],
+            [1095.5, 1421.75],
+            [1260, 1421.75],
+            [1260, 1254.25]], {
+            color: colorMap.get("7-120"),
+            fillColor: colorMap.get("7-120"),
+            fillOpacity: 0.5
+        }).addTo(map);
+        hmCME7120.bindPopup("<b>7-120</b><br>Utilization: " + (100 * utilNumsCME[3]) + "%");
+        var hmCME7124 = L.polygon([
+            [1095.5, 1422.25],
+            [1095.5, 1443.5],
+            [963, 1443.5],
+            [963, 1512.5],
+            [982, 1512.5],
+            [982, 1590],
+            [1260, 1590],
+            [1260, 1422.25]], {
+            color: colorMap.get("7-124"),
+            fillColor: colorMap.get("7-124"),
+            fillOpacity: 0.5
+        }).addTo(map);
+        hmCME7124.bindPopup("<b>7-124</b><br>Utilization: " + (100 * utilNumsCME[4]) + "%");
         let marker = null;
         var point = "";
         map.on('click', (event) => {
