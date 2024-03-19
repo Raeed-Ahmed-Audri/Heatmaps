@@ -7,106 +7,24 @@
 </head>
 
 <body>
+    <script src="map.js"></script>
     <div id="CME7">
+        <script>
+            var roomsCME = ["7-108", "7-112", "7-116", "7-120", "7-124", "7-128", "7-132", "7-136", "7-141", "7-145"];      
+            var roomPoints = [
+                [[982, 840], [1053.5, 840], [1053.5, 779.5], [1111, 779.5], [1111, 830], [1260, 830], [1260, 932.5], [1237.5, 932.5], [1237.5, 952.75], [982, 952.75]],
+                [[982, 1010.5], [963, 1010.5], [963, 1085.75], [1260, 1085.75], [1260, 1022.5], [1237.5, 1022.5], [1237.5, 953.25], [982, 953.25]],
+                [[990.5, 1086.25], [990.5, 1214.5], [1056.5, 1214.5], [1056.5, 1253.75], [1260, 1253.75], [1260, 1086.25]],
+                [[1056.5, 1254.25], [1056.5, 1385.5], [1095.5, 1385.5], [1095.5, 1421.75], [1260, 1421.75], [1260, 1254.25]],
+                [[1095.5, 1422.25], [1095.5, 1443.5], [963, 1443.5], [963, 1512.5], [982, 1512.5], [982, 1589.75], [1260, 1589.75], [1260, 1422.25]],
+                [[982, 1590.25], [982, 1682.5], [963, 1682.5], [963, 1774.5], [1056.25, 1774.5], [1056.25, 1757.75], [1260, 1757.75], [1260, 1590.25]],
+                [[963, 1813.5], [963, 1850], [982, 1850], [982, 1925.75], [1260, 1925.75], [1260, 1758.25], [1056.75, 1758.25], [1056.75, 1813.5]],
+                [[982, 1926.25], [982, 2017.5], [1056.5, 2017.5], [1056.5, 2101], [1140, 2101], [1140, 2108.5], [1260, 2108.5], [1260, 1997.5], [1240, 1997.5], [1240, 1926.25]],
+                [[759.5, 1947], [759.5, 2093.75], [896.5, 2093.75], [896.5, 2015], [917, 2015], [917, 1956], [877.5, 1956], [877.5, 1947]],
+                [[759.5, 2094.25], [759.5, 2276], [877.5, 2276], [877.5, 2267], [915.5, 2267], [915.5, 2192], [896.5, 2192], [896.5, 2094.25]]
+            ];
+            var utilNumsCME = [0.86, 0.64, 0.42, 0.39, 0.09, 0.92, 0.77, 0.55, 0.26, 0.12];
+            mapLoader("CME7", roomsCME, roomPoints, utilNumsCME, "./Images/CME/7.png", [1700, 3400])
+        </script>
     </div>
-    <script>
-        var roomsCME = ["7-108", "7-112", "7-116", "7-120", "7-124"];
-        var utilNumsCME = [0.86, 0.64, 0.42, 0.39, 0.09];
-        var colors = ["blue", "green", "yellow", "orange", "red"];
-        var colorMap = new Map();
-        for (i = 0; i < roomsCME.length; i++) {
-            if (utilNumsCME[i] >= 0.8) {
-                colorMap.set(roomsCME[i], colors[4]);
-            } else if (utilNumsCME[i] < 0.8 && utilNumsCME[i] >= 0.6) {
-                colorMap.set(roomsCME[i], colors[3]);
-            } else if (utilNumsCME[i] < 0.6 && utilNumsCME[i] >= 0.4) {
-                colorMap.set(roomsCME[i], colors[2]);
-            } else if (utilNumsCME[i] < 0.4 && utilNumsCME[i] >= 0.2) {
-                colorMap.set(roomsCME[i], colors[1]);
-            } else {
-                colorMap.set(roomsCME[i], colors[0]);
-            }
-        }
-        var map = L.map("CME7", {
-            crs: L.CRS.Simple,
-            minZoom: -1.5
-        }).setView([1000, 850], 13);
-        var bounds = [[0, 0], [1700, 3400]];
-        var image = L.imageOverlay("./Images/CME/7.png", bounds).addTo(map);
-        map.fitBounds(bounds);
-        var hmCME7108 = L.polygon([
-            [982, 840],
-            [1053.5, 840],
-            [1053.5, 779.5],
-            [1111, 779.5],
-            [1111, 830],
-            [1260, 830],
-            [1260, 932.5],
-            [1237.5, 932.5],
-            [1237.5, 952.75],
-            [982, 952.75]], {
-            color: colorMap.get("7-108"),
-            fillColor: colorMap.get("7-108"),
-            fillOpacity: 0.5
-        }).addTo(map);
-        hmCME7108.bindPopup("<b>7-108</b><br>Utilization: " + (100 * utilNumsCME[0]) + "%");
-        var hmCME7112 = L.polygon([
-            [982, 1010.5],
-            [963, 1010.5],
-            [963, 1085.75],
-            [1260, 1085.75],
-            [1260, 1022.5],
-            [1237.5, 1022.5],
-            [1237.5, 953.25],
-            [982, 953.25]], {
-            color: colorMap.get("7-112"),
-            fillColor: colorMap.get("7-112"),
-            fillOpacity: 0.5
-        }).addTo(map);
-        hmCME7112.bindPopup("<b>7-112</b><br>Utilization: " + (100 * utilNumsCME[1]) + "%");
-        var hmCME7116 = L.polygon([
-            [990.5, 1086.25],
-            [990.5, 1214.5],
-            [1056.5, 1214.5],
-            [1056.5, 1253.75],
-            [1260, 1253.75],
-            [1260, 1086.25]], {
-            color: colorMap.get("7-116"),
-            fillColor: colorMap.get("7-116"),
-            fillOpacity: 0.5
-        }).addTo(map);
-        hmCME7116.bindPopup("<b>7-116</b><br>Utilization: " + (100 * utilNumsCME[2]) + "%");
-        var hmCME7120 = L.polygon([
-            [1056.5, 1254.25],
-            [1056.5, 1385.5],
-            [1095.5, 1385.5],
-            [1095.5, 1421.75],
-            [1260, 1421.75],
-            [1260, 1254.25]], {
-            color: colorMap.get("7-120"),
-            fillColor: colorMap.get("7-120"),
-            fillOpacity: 0.5
-        }).addTo(map);
-        hmCME7120.bindPopup("<b>7-120</b><br>Utilization: " + (100 * utilNumsCME[3]) + "%");
-        var hmCME7124 = L.polygon([
-            [1095.5, 1422.25],
-            [1095.5, 1443.5],
-            [963, 1443.5],
-            [963, 1512.5],
-            [982, 1512.5],
-            [982, 1590],
-            [1260, 1590],
-            [1260, 1422.25]], {
-            color: colorMap.get("7-124"),
-            fillColor: colorMap.get("7-124"),
-            fillOpacity: 0.5
-        }).addTo(map);
-        hmCME7124.bindPopup("<b>7-124</b><br>Utilization: " + (100 * utilNumsCME[4]) + "%");
-        let marker = null;
-        var point = "";
-        map.on('click', (event) => {
-            marker = L.marker([event.latlng.lat, event.latlng.lng]).addTo(map);
-            marker.bindPopup("Coords (lat/lng): " + event.latlng.lat + ", " + event.latlng.lng);
-        })
-    </script>
 </body>
