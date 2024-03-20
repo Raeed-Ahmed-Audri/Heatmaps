@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-
 scope = ['https://www.googleapis.com/auth/spreadsheets']
 
 # Add credentials to the account
@@ -12,23 +11,28 @@ client = gspread.authorize(creds)
 spreadsheet_id = '1IIGyJwBnY5cvkyzs2-chTx-R-r4laxsm2gu3qHPGBkU'
 spreadsheet = client.open_by_key(spreadsheet_id)
 
-
 all_data = []
 
 # Loop through each worksheet in the spreadsheet
 for sheet in spreadsheet.worksheets():
     # Assuming room numbers are in Column D and utilizations are in Column E
-    room_numbers = sheet.col_values(4)  # 4 corresponds to Column D
-    utilizations = sheet.col_values(5)  # 5 corresponds to Column E
+    room_numbers = sheet.col_values(4)[1:]  # Skip the header
+    utilizations = sheet.col_values(5)[1:]  # Skip the header
 
-    sheet_data = list(zip(room_numbers, utilizations))
+    # Get the title of the current sheet
+    sheet_title = sheet.title
+
+    # Combine the sheet title, room numbers, and utilizations into a list of tuples
+    sheet_data = [(sheet_title, room_number, utilization) for room_number, utilization in zip(room_numbers, utilizations)]
     
+    # Append the data from the current sheet to the main list
     all_data.extend(sheet_data)
 
 # Do something with all_data, like printing it out or processing it further
 print(all_data)
 
-#####TEST LATER #######
+
+"""#####TEST LATER #######
 conn = mysql.connector.connect(
     host='your_host',
     user='your_username',
@@ -58,4 +62,4 @@ conn.commit()
 cursor.close()
 conn.close()
 
-print('Data has been inserted into the MySQL database.')
+print('Data has been inserted into the MySQL database.')"""
