@@ -12,15 +12,19 @@ function mapLoader(divName, rooms, roomPoints, utilNums, imagePath, imageSize) {
     for (i = 0; i < rooms.length; i++) {
         colorMap.set(rooms[i], getColour(utilNums[i]))
     }
-    //Create map object in div named CME7
+    //Create map object in div
+    var bounds = [[0, 0], imageSize];
     var map = L.map(divName, {
         crs: L.CRS.Simple,
-        minZoom: -1.5
+        minZoom: -2,
+        center: [1100, 1700],
+        maxBounds: bounds,
+        maxBoundsViscosity: 1
     }).setView([0, 0], 0);
     //Set floorplan as the main tile of the map
-    var bounds = [[0, 0], imageSize];
     L.imageOverlay(imagePath, bounds).addTo(map);
     map.fitBounds(bounds);
+    
     //load each room overlay
     for (j = 0; j < rooms.length; j++) {
         var room = L.polygon(roomPoints[j], {
@@ -42,13 +46,21 @@ function mapLoader(divName, rooms, roomPoints, utilNums, imagePath, imageSize) {
 
         var div = L.DomUtil.create('div', 'info legend'),
             grades = [0, 0.2, 0.4, 0.6, 0.8, 1];
-
+            div.innerHTML += '<p>Utilization (%)</p>'
         //Generate legend item for each color region
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
-                '<i style="background:' + getColour(grades[i]) + '"></i> ' + 100 * grades[i] + (grades[i + 1] ? '&ndash;' + 100 * grades[i + 1] + '%<br>' : '+%');
+                '<i style="background:' + getColour(grades[i]) + '"></i> ' + 100 * grades[i] + (grades[i + 1] ? '&ndash;' + 100 * grades[i + 1] + '<br>' : '+');
         }
         return div;
     };
     legend.addTo(map);
+    setInterval(function(){map.invalidateSize()}, 100);
 }
+$(document).ready(function () {
+    $('[data-fancybox]').fancybox({
+    clickSlide: false, // disable close on outside click
+    touch: false, // disable close on swipe
+    clickOutside: false
+});
+});

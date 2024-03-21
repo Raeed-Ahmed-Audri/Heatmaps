@@ -1,5 +1,9 @@
 $(document).ready(function(){
-  $("[data-fancybox]").fancybox();
+  $("[data-fancybox]").fancybox({
+    clickSlide: false, 
+    touch: false, 
+    clickOutside: false
+  });
   $(".items").isotope({
     filter: '*',
     animationOptions: {
@@ -27,4 +31,3 @@ $(document).ready(function(){
     return false;
   })
 });
-  
