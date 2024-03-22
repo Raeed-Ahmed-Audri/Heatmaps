@@ -6,7 +6,10 @@
     margin-right: auto;
 }
 
-#hidden-content {
+#hidden-contentCME7,
+#hidden-contentCME6,
+#hidden-contentCME5,
+#hidden-contentETLC2 {
     display: none;
     background-color: #fff;
     padding: 20px;
@@ -76,7 +79,8 @@
     transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 }
 
-.items button:hover, .items button:hover i {
+.items button:hover,
+.items button:hover i {
     background-color: #275D38;
     /* New background color for the box */
     color: #F2CD00 !important;
