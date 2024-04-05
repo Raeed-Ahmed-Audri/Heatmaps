@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    color: #333;
+    max-width: 100%;
+}
+
+.heading h2 {
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.filter {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.filter a {
+    color: #F2CD00;
+    border: 1px solid #F2CD00;
+    background-color: #275D38;
+    padding: 10px 14px;
+    margin: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter a:hover,
+.filter .current {
+    background-color: #F2CD00;
+    color: #275D38;
+}
+
+.filter li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.itemsContainer {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.items li {
+    padding: 5px 5px 0 5px; /* Adjusted bottom padding to 0 */
+    float: left;
+    width: 25%; /* 4 items in a row for large screens */
+}
+
+.items li img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+  .items li {
+    width: 25%; /* 4 items in a row */
+  }
+}
+
+@media (max-width: 992px) {
+  .items li {
+    width: 33.3333%; /* 3 items in a row */
+  }
+}
+
+@media (max-width: 768px) {
+  .items li {
+    width: 50%; /* 2 items in a row */
+  }
+}
+
+@media (max-width: 576px) {
+  .items li {
+    width: 100%; /* 1 item in a row */
+  }
+}
+
+/* Clear floats after the items */
+.items:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.icons {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important; /* Corrected to center both horizontally and vertically */
+  color: #275D38 !important;
+  z-index: 4; /* Ensure icons are above links and overlay */
+}
+
+.icons i{
+  color: #275D38 !important;
+  font-size: 20px;
+  margin-top: px;
+}
+
+.items a {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  background-color: #F2CD00;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.items .item {
+  position: relative;
+  overflow: hidden;
+}
+
+.items .item img {
+  transition: transform 0.5s ease-out; /* Makes the transition smoother and slower */
+}
+
+.items .item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  z-index: 1;
+}
+
+.items .item:hover::after {
+  opacity: 1; 
+}
+
+.item:hover .icons {
+  opacity: 0.7; /* Semi-transparent icons on hover */
+}
+
+.item:hover .imagesOverlay {
+  opacity: 0; 
+}
+
+.items a, .items a .icons i {
+  opacity: 0; /* Set to 0 to be fully transparent */
+  transition: opacity 0.3s ease; /* Transition for a smooth effect */
+}
+
+.items .item:hover a, .items .item:hover a .icons i {
+  opacity: 1; /* Set to 1 to be fully opaque */
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.items a:hover, .items a:hover i {
+  background-color: #275D38; /* New background color for the box */
+  color: #F2CD00 !important; /* New icon color */
+}
+
+.items .item:hover img {
+  -webkit-transform: scale(1.05, 1.05); /* For old versions of Chrome, Safari, etc. */
+  -moz-transform: scale(1.05, 1.05);    /* For old versions of Firefox */
+  -o-transform: scale(1.05, 1.05);      /* For old versions of Opera */
+  -ms-transform: scale(1.05, 1.05);     /* For old versions of IE */
+  transform: scale(1.05, 1.05);         /* Standard syntax */
+}

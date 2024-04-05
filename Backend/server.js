@@ -1,28 +1,28 @@
-const express = require('express');
-const mysql = require('mysql');
+import path from 'path';
+import express from 'express';
+import { getData } from './database.js';
 const app = express();
 const port = 3000;
 
-// Set up MySQL connection
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Gooball123',
-  database: 'heatmaps'
-});
+app.use(express.static('public'));
 
-// Connect to MySQL
-connection.connect(error => {
-  if (error) throw error;
-  console.log("Successfully connected to the database.");
-});
+app.get('/apiCME7', async (req, res) => {
+  var data = await getData("CME", "7");
+  res.json(data);
+})
 
-// Define a route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.get('/apiCME6', async (req, res) => {
+  var data = await getData("CME", "6");
+  res.json(data);
+})
+
+app.get('/apiCME5', async (req, res) => {
+  var data = await getData("CME", "5");
+  res.json(data);
+})
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
