@@ -1,7 +1,10 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import mysql.connector
-
+import os
+from dotenv import load_dotenv
+# directory should read .env from Backend folder, make sure current directory is the "Heatmaps" folder, or adjust filepath here.
+load_dotenv("./Backend/.env")
 # Google Sheets API setup
 scope = ['https://www.googleapis.com/auth/spreadsheets']
 creds = ServiceAccountCredentials.from_json_keyfile_name('Data\heatmaps-417802-4be522d666c8.json', scope)
@@ -21,10 +24,10 @@ for sheet in spreadsheet.worksheets():
 
 # MySQL connection setup
 conn = mysql.connector.connect(
-    host='localhost',  # or your MySQL server host
-    user='root',  # your MySQL username
-    password='Gooball123',  # your MySQL password
-    database='heatmaps'  # your MySQL database name
+    host=os.getenv("DB_HOST"),  # or your MySQL server host
+    user=os.getenv("DB_USER"),  # your MySQL username
+    password=os.getenv("DB_PASS"),  # your MySQL password
+    database=os.getenv("DB_NAME")  # your MySQL database name
 )
 cursor = conn.cursor()
 

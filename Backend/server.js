@@ -21,6 +21,26 @@ app.get('/apiCME5', async (req, res) => {
   res.json(data);
 })
 
+app.get('/apiCME4', async (req, res) => {
+  var data = await getData("CME", "4");
+  res.json(data);
+})
+
+app.get('/apiDICE8A', async (req, res) => {
+  var data = await getData("DICE", "8A");
+  res.json(data);
+})
+
+app.get('/apiDICE8', async (req, res) => {
+  var data = await getData("DICE", "8");
+  res.json(data);
+})
+
+app.get('/apiETLC2', async (req, res) => {
+  var data = await getData("ETLC", "E2");
+  res.json(data);
+})
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
