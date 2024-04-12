@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Utilization</title>
+    <!-- Link to FancyBox CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
+    <!-- Link to stylesheets -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="leaflet.css">
+    <!-- Link to jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!--Leaflet links-->
+    <link rel="stylesheet" href="leaflet.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -19,6 +22,7 @@
 </head>
 
 <body>
+    <!-- Link to leaflet map script and fancybox script files-->
     <script src="map.js"></script>
     <script src="script.js"></script>
     <div id="drawing" class="section">
@@ -42,20 +46,27 @@
 
                 <div class="itemsContainer">
                     <ul class="items">
-                        <!-- Repeated item structure for each image -->
+                        <!-- Repeated item structure for each map, just with different assets for each floor, but same execution -->
                         <li class="CME col-xs-6 col-sm-4 col-md-3 col-lg-3">
                             <div class="item">
+                                <!-- Thumbnail for block -->
                                 <img src="./Images/Thumbnails/CME7.png" alt="CME Drawing">
                                 <div class="icons">
+                                    <!-- Button functionality, with search icon and caption under map -->
                                     <button class="projectLink" data-fancybox="gallery" data-src="#hidden-contentCME7"
                                         data-caption="CME-7"><i class="fas fa-search"></i></button>
+                                    <!-- Div that contains leaflet map -->
                                     <div id="hidden-contentCME7">
+                                        <!-- Script that grabs data from the database and then generates a heatmap in the gallery -->
                                         <script>
                                             var roomDataCME7 = [];
                                             var numDataCME7 = [];
+                                            //Fetch room data for this building and floor from our SQL API asynchronously.
                                             const reqCME7 = new Request("http://localhost:3000/apiCME7");
                                             fetch(reqCME7).then((response) => response.json()).then((data) => {
+                                                //Loop through data that was fetched and get the right rows based on what room coordinates are given.
                                                 for (var i = 0; i < data.length; i++) {
+                                                    //If confition that omits rooms we do not have coordinate points for.
                                                     if (i != 0 && i != 1 && i != 6 && i != 13 && i != 14) {
                                                         roomDataCME7.push(data[i]["room_number"]);
                                                         numDataCME7.push(data[i]["utilization_percent"]);
@@ -83,7 +94,8 @@
                                                     //7-145
                                                     [[983.5, 2094.25], [983.5, 2276], [1135.5, 2276], [1135.5, 2267], [1185, 2267], [1185, 2192], [1160, 2192], [1160, 2094.25]]
                                                 ];
-                                                mapLoader("hidden-contentCME7", roomDataCME7, roomPoints, numDataCME7, "../Grayscale Images/CME/7.png", [2200, 3400]);
+                                                //Run the map loading function from map.js based on the grabbed data.
+                                                mapLoader("hidden-contentCME7", roomDataCME7, roomPoints, numDataCME7, "../Grayscale Images/CME/7.png", "../Images/CME/7.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -147,7 +159,7 @@
                                                     //6-145
                                                     [[983.5, 2094.25], [983.5, 2276], [1135.5, 2276], [1135.5, 2267], [1183, 2267], [1183, 2207], [1159, 2207], [1159, 2141], [1187, 2141], [1187, 2094.25]]
                                                 ];
-                                                mapLoader("hidden-contentCME6", roomDataCME6, roomPoints, numDataCME6, "../Grayscale Images/CME/6.png", [2200, 3400]);
+                                                mapLoader("hidden-contentCME6", roomDataCME6, roomPoints, numDataCME6, "../Grayscale Images/CME/6.png", "../Images/CME/6.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -212,7 +224,7 @@
                                                     //5-145
                                                     [[983.5, 2094.25], [983.5, 2276], [1135.5, 2276], [1135.5, 2267], [1183, 2267], [1183, 2207], [1159, 2207], [1159, 2141], [1187, 2141], [1187, 2094.25]]
                                                 ];
-                                                mapLoader("hidden-contentCME5", roomDataCME5, roomPoints, numDataCME5, "../Grayscale Images/CME/5.png", [2200, 3400]);
+                                                mapLoader("hidden-contentCME5", roomDataCME5, roomPoints, numDataCME5, "../Grayscale Images/CME/5.png", "../Images/CME/5.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -277,7 +289,72 @@
                                                     //4-145
                                                     [[983.5, 2094.25], [983.5, 2276], [1135.5, 2276], [1135.5, 2267], [1183, 2267], [1183, 2207], [1159, 2207], [1159, 2141], [1187, 2141], [1187, 2094.25]]
                                                 ];
-                                                mapLoader("hidden-contentCME4", roomDataCME4, roomPoints, numDataCME4, "../Grayscale Images/CME/4.png", [2200, 3400]);
+                                                mapLoader("hidden-contentCME4", roomDataCME4, roomPoints, numDataCME4, "../Grayscale Images/CME/4.png", "../Images/CME/4.png", [2200, 3400]);
+                                            }).catch(console.error);
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="imagesOverlay"></div>
+
+                            </div>
+                        </li>
+
+                        <li class="CME col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                            <div class="item">
+                                <img src="./Images/Thumbnails/CME3.png" alt="CME Drawing">
+                                <div class="icons">
+                                    <button class="projectLink" data-fancybox="gallery" data-src="#hidden-contentCME3"
+                                        data-caption="CME-3"><i class="fas fa-search"></i></button>
+
+                                    <div id="hidden-contentCME3">
+                                        <script>
+                                            var roomDataCME3 = [];
+                                            var numDataCME3 = [];
+                                            const reqCME3 = new Request("http://localhost:3000/apiCME3");
+                                            fetch(reqCME3).then((response) => response.json()).then((data) => {
+                                                for (var i = 0; i < data.length; i++) {
+                                                    if (i != 0 && i != 1 && i != 9 && i != 20 && i != 21) {
+                                                        roomDataCME3.push(data[i]["room_number"]);
+                                                        numDataCME3.push(data[i]["utilization_percent"]);
+                                                    }
+                                                }
+                                                var roomPoints = [
+                                                    //3-108
+                                                    [[1271, 845], [1363.5, 845], [1363.5, 784.5], [1437.5, 784.5], [1437.5, 835], [1628.5, 835], [1628.5, 937.5], [1601.5, 937.5], [1601.5, 957.75], [1271, 957.75]],
+                                                    //3-112
+                                                    [[1271, 1015.5], [1246.5, 1015.5], [1246.5, 1090.75], [1628.5, 1090.75], [1628.5, 1027.5], [1601.5, 1027.5], [1601.5, 958.25], [1271, 958.25]],
+                                                    //3-113
+                                                    [[982, 775], [982, 932.75], [1161, 932.75], [1161, 846], [1187, 846], [1187, 784], [1135.5, 784], [1135.5, 775]],
+                                                    //3-116
+                                                    [[1282, 1091.25], [1282, 1219.5], [1363.5, 1219.5], [1363.5, 1258.75], [1628.5, 1258.75], [1628.5, 1091.25]],
+                                                    //3-117
+                                                    [[982, 933.25], [982, 1089.75], [1187, 1089.75], [1187, 1015], [1161, 1015], [1161, 933.25]],
+                                                    //3-120
+                                                    [[1363.5, 1259.25], [1363.5, 1390.5], [1417, 1390.5], [1417, 1426.75], [1628.5, 1426.75], [1628.5, 1259.25]],
+                                                    //3-121
+                                                    [[982, 1090.25], [982, 1257.75], [1161, 1257.75], [1161, 1181], [1187, 1181], [1187, 1090.25]],
+                                                    //3-124
+                                                    [[1417, 1427.25], [1417, 1448.5], [1246.5, 1448.5], [1246.5, 1517.5], [1271, 1517.5], [1271, 1594.75], [1628.5, 1594.75], [1628.5, 1427.25]],
+                                                    //3-125
+                                                    [[982, 1258.75], [982, 1425.75], [1187, 1425.75], [1187, 1351], [1161, 1351], [1161, 1258.75]],
+                                                    //3-128
+                                                    [[1271, 1595.25], [1271, 1687.5], [1246.5, 1687.5], [1246.5, 1779.5], [1366.75, 1779.5], [1366.75, 1762.75], [1628.5, 1762.75], [1628.5, 1595.25]],
+                                                    //3-129
+                                                    [[982, 1426.25], [982, 1594.75], [1161, 1594.75], [1161, 1517], [1187, 1517], [1187, 1426.25]],
+                                                    //3-132
+                                                    [[1246.5, 1820.5], [1246.5, 1854], [1271, 1854], [1271, 1929.75], [1628.5, 1929.75], [1628.5, 1763.25], [1367.25, 1763.25], [1367.25, 1820.5]],
+                                                    //3-133
+                                                    [[982, 1595.25], [982, 1761.75], [1187, 1761.75], [1187, 1688], [1161, 1688], [1161, 1595.25]],
+                                                    //3-136
+                                                    [[1271, 1930.25], [1271, 2021.5], [1363.5, 2021.5], [1363.5, 2105], [1476.5, 2105], [1476.5, 2112.5], [1628.5, 2112.5], [1628.5, 2002.5], [1628.5, 1930.25]],
+                                                    //3-137
+                                                    [[982, 1762.75], [982, 1861], [1012, 1861], [1012, 1929.75], [1161, 1929.75], [1161, 1855], [1187, 1855], [1187, 1762.75]],
+                                                    //3-141
+                                                    [[982, 1951], [982, 2097.75], [1187, 2097.75], [1187, 2022], [1161, 2022], [1161, 1930.25], [1012, 1930.25], [1012, 1951]],
+                                                    //3-145
+                                                    [[982, 2098.25], [982, 2280], [1133, 2280], [1133, 2271], [1183, 2271], [1183, 2211], [1159, 2211], [1159, 2145], [1187, 2145], [1187, 2098.25]]
+                                                ];
+                                                mapLoader("hidden-contentCME3", roomDataCME3, roomPoints, numDataCME3, "../Grayscale Images/CME/3.png", "../Images/CME/3.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -316,7 +393,7 @@
                                                     //8A-292
                                                     [[1205, 1240], [910, 1240], [910, 888], [1285, 888], [1285, 1069], [1230, 1069], [1230, 1137], [1205, 1137]]
                                                 ];
-                                                mapLoader("hidden-contentDICE8A", roomDataDICE8A, roomPoints, numDataDICE8A, "../Grayscale Images/DICE/8A.png", [2200, 3400]);
+                                                mapLoader("hidden-contentDICE8A", roomDataDICE8A, roomPoints, numDataDICE8A, "../Grayscale Images/DICE/8A.png", "../Images/DICE/8A.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -353,7 +430,7 @@
                                                     //8-292
                                                     [[1357, 1140.75], [910, 1140.75], [910, 567.5], [1357, 567.5]]
                                                 ];
-                                                mapLoader("hidden-contentDICE8", roomDataDICE8, roomPoints, numDataDICE8, "../Grayscale Images/DICE/8.png", [2200, 3400]);
+                                                mapLoader("hidden-contentDICE8", roomDataDICE8, roomPoints, numDataDICE8, "../Grayscale Images/DICE/8.png", "../Images/DICE/8.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -410,7 +487,7 @@
                                                     //E2-100A
                                                     [[777, 1816.25], [535, 1816.25], [535, 2212], [777, 2212]]
                                                 ];
-                                                mapLoader("hidden-contentETLC2", roomDataETLC2, roomPoints, numDataETLC2, "../Grayscale Images/ETLC/2.png", [2200, 3400]);
+                                                mapLoader("hidden-contentETLC2", roomDataETLC2, roomPoints, numDataETLC2, "../Grayscale Images/ETLC/2.png", "../Images/ETLC/2.png", [2200, 3400]);
                                             }).catch(console.error);
                                         </script>
                                     </div>
@@ -422,7 +499,21 @@
 
                         <li class="NINT col-xs-6 col-sm-4 col-md-3 col-lg-3">
                             <div class="item">
-                                <img src="./Images/Thumbnails/MEC 1.png" alt="CME Drawing">
+                                <img src="./Images/Thumbnails/NINT5.png" alt="CME Drawing">
+                                <div class="icons">
+                                    <a href="./Images/CME/1.png" class="projectLink" data-fancybox="gallery"
+                                        data-caption="CME1">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                </div>
+                                <div class="imagesOverlay"></div>
+
+                            </div>
+                        </li>
+
+                        <li class="NINT col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                            <div class="item">
+                                <img src="./Images/Thumbnails/NINT6.png" alt="CME Drawing">
                                 <div class="icons">
                                     <a href="./Images/CME/1.png" class="projectLink" data-fancybox="gallery"
                                         data-caption="CME1">
@@ -489,8 +580,6 @@
 
                             </div>
                         </li>
-
-
 
                     </ul>
                 </div>
