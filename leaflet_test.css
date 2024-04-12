@@ -1,0 +1,88 @@
+#CME7 {
+    height: 500px;
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#hidden-contentCME7,
+#hidden-contentCME6,
+#hidden-contentCME5,
+#hidden-contentETLC2 {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    width: 90vw;
+    height: 80vh;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.legend p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.items button {
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    background-color: #F2CD00;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: none;
+    padding: 0;
+}
+
+.items button,
+.items button .icons i {
+    opacity: 0;
+    /* Set to 0 to be fully transparent */
+    transition: opacity 0.3s ease;
+    /* Transition for a smooth effect */
+}
+
+.items .item:hover .icons button,
+.items .item:hover .icons i {
+    opacity: 1;
+    /* Set to 1 to be fully opaque */
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.items button:hover,
+.items button:hover i {
+    background-color: #275D38;
+    /* New background color for the box */
+    color: #F2CD00 !important;
+    /* New icon color */
+}
